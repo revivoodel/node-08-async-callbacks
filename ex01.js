@@ -11,9 +11,24 @@
 //
 // Run: node ex01.js
 
+const { log } = require("console");
 const fs = require("fs");
 const path = require("path");
 
 const filePath = path.join(__dirname, "sample.txt");
 
 // write your code here
+fs.readFile(filePath, "utf8", (err, text) => {
+    if (err) return console.log(err.message);
+
+    console.log("File Content:");
+    console.log(text);
+    console.log();
+
+    fs.stat(filePath, (err, stats) => {
+        if (err) return console.log(err.message);
+
+        console.log(`Size: ${stats.size} bytes`);
+        console.log(`Created At: ${stats.birthtime.toISOString()}`);
+    });
+});
