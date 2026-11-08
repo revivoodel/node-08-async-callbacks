@@ -14,3 +14,13 @@
 const os = require("os");
 
 // write your code here
+function getCPUs(callback) {
+    const cpus = os.cpus();
+    callback(cpus);
+}
+
+getCPUs((cpus) => {
+    cpus.forEach((cpu, index) => {
+        console.log(`CPU ${index}: ${cpu.model}`);
+    });
+});
