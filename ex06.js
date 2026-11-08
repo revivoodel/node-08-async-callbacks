@@ -15,3 +15,11 @@ const path = require("path");
 const filePath = path.join(__dirname, "log.txt");
 
 // write your code here
+
+
+fs.appendFile(filePath, `${new Date().toISOString()} - Log entry\n`, (err) => {
+    if (err) {
+        console.log(err.message);
+        return;
+    }
+});
