@@ -17,3 +17,34 @@ const path = require("path");
 const directoryPath = path.join(__dirname, "data-folder");
 
 // write your code here
+
+fs.readdir(directoryPath, (err, files) => {
+    if (err) {
+        console.log(err.message);
+        return;
+    }
+
+    let totalSize = 0;
+    let count = 0;
+
+    if (files.length === 0) {
+        console.log("Total size: 0 bytes");
+        return;
+    }
+
+    files.forEach((file) => {
+        const filePath = path.join(directoryPath, file);
+
+        fs.lstat(filePath, (err, stats) => {
+            if (!err && stats.isFile()) {
+                totalSize += stats.size;
+            }
+
+            count++;
+
+            if (count === files.length) {
+                console.log(`Total size: ${totalSize} bytes`);
+            }
+        });
+    });
+ });
